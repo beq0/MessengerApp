@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "965026677544",
+    "project_id": "messnegerapp",
+    "storage_bucket": "messnegerapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965026677544:android:6ac13ade9b9db44f86461d",
+        "android_client_info": {
+          "package_name": "com.bgugulashvili.mmirianashvili.messengerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "965026677544-99mgu46brmel8c1k3n74fm3b9l55h4bm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLv8kYAJ9wnODPXu5d8RVR32ramWW3zNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965026677544-99mgu46brmel8c1k3n74fm3b9l55h4bm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
