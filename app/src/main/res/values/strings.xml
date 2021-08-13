@@ -5,4 +5,6 @@
     <string name="login_txt"><strong>SIGN IN</strong></string>
     <string name="login_not_registered_txt">Not registered?</string>
     <string name="register_txt"><strong>SIGN UP</strong></string>
+    <string name="profession_placeholder">What I do</string>
+    <string name="sign_out">SIGN OUT</string>
 </resources>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="com.bgugulashvili.mmirianashvili.messengerapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,13 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.MessengerApp">
         <activity
-                android:name=".MainActivity"
+                android:name=".contacts.ContactsActivity"
+                android:exported="true" />
+        <activity
+                android:name=".auth.register.RegisterActivity"
+                android:exported="true" />
+        <activity
+                android:name=".auth.login.LoginActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
