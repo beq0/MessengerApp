@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
          android:layout_width="wrap_content"
@@ -100,7 +100,11 @@
             android:layout_height="wrap_content"
             app:layout_anchor="@id/contacts_bottom_toolbar"
             android:layout_margin="16dp"
-            android:src="@drawable/add_icon"/>
+            android:src="@drawable/add_icon"
+            android:tint="@color/white"
+            app:backgroundTint="@color/primaryAppColor"
+            android:backgroundTint="@color/primaryAppColor"
+            />
 
     <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/contacts_bottom_toolbar"
