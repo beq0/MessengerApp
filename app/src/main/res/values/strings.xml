@@ -7,4 +7,5 @@
     <string name="register_txt"><strong>SIGN UP</strong></string>
     <string name="profession_placeholder">What I do</string>
     <string name="sign_out">SIGN OUT</string>
+    <string name="filter_placeholder">Search</string>
 </resources>

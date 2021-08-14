@@ -2,6 +2,7 @@ package com.bgugulashvili.mmirianashvili.messengerapp.auth.register
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -29,6 +30,8 @@ class RegisterActivity : AppCompatActivity(), IRegisterView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         registerPresenter = RegisterPresenter(this)
         initView()
         initListeners()
@@ -36,6 +39,7 @@ class RegisterActivity : AppCompatActivity(), IRegisterView {
 
     override fun registrationSuccessful(user: FirebaseUser) {
         Toast.makeText(this, "Registered: ${user.email}", Toast.LENGTH_SHORT).show()
+        finish()
         ContactsActivity.start(this, AuthUtils.getUsernameFromEmail(user.email!!))
     }
 

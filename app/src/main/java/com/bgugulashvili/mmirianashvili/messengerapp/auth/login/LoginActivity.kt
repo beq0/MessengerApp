@@ -1,5 +1,7 @@
 package com.bgugulashvili.mmirianashvili.messengerapp.auth.login
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
@@ -45,6 +47,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
 
     override fun authenticationSuccessful(user: FirebaseUser) {
         Toast.makeText(this, "Logged in: ${user.email}", Toast.LENGTH_SHORT).show()
+        finish()
         ContactsActivity.start(this, AuthUtils.getUsernameFromEmail(user.email!!))
     }
 
@@ -72,7 +75,14 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         Log.i(AuthUtils.LOG_TAG, "User already logged in: ${user.email}")
         Toast.makeText(this, "User already Logged in: ${user.email}", Toast.LENGTH_SHORT).show()
 
+        finish()
         ContactsActivity.start(this, AuthUtils.getUsernameFromEmail(user.email!!))
+    }
+
+    companion object {
+        fun start(context: Context) {
+            context.startActivity(Intent(context, LoginActivity::class.java))
+        }
     }
 
 }
