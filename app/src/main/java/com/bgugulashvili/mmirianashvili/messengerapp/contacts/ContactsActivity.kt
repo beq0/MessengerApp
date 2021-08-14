@@ -8,6 +8,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.bgugulashvili.mmirianashvili.messengerapp.R
 import com.bgugulashvili.mmirianashvili.messengerapp.auth.AuthUtils
 import com.bgugulashvili.mmirianashvili.messengerapp.auth.login.LoginActivity
@@ -15,11 +17,15 @@ import com.bgugulashvili.mmirianashvili.messengerapp.data.RealtimeDB
 import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.User
 import com.bgugulashvili.mmirianashvili.messengerapp.shared.BottomNavigationController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.ArrayList
 
 class ContactsActivity : AppCompatActivity(), IContactsView {
 
-    private lateinit var signOutButton: Button
-    private lateinit var etSearch: EditText
+    private lateinit var mainViewPager: ViewPager2
+    private lateinit var contactsFragment: Fragment
+    private lateinit var profileFragment: Fragment
+    private lateinit var fragments: ArrayList<Fragment>
+    private lateinit var contactsViewPagerAdapter: ContactsViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +44,8 @@ class ContactsActivity : AppCompatActivity(), IContactsView {
 
         BottomNavigationController.init(findViewById(R.id.bottom_navigation_view))
         initView()
+        initViewPager()
         initListeners()
-
     }
 
     override fun onSearch(users: List<User>) {
@@ -47,16 +53,19 @@ class ContactsActivity : AppCompatActivity(), IContactsView {
     }
 
     private fun initView() {
-        signOutButton = findViewById(R.id.profile_sign_out)
-        etSearch = findViewById(R.id.contacts_search)
+        mainViewPager = findViewById(R.id.main_view_pager)
+    }
+
+    private fun initViewPager() {
+        contactsFragment = ContactsFragment(this)
+        profileFragment = ProfileFragment()
+        fragments = arrayListOf(contactsFragment, profileFragment)
+
+        contactsViewPagerAdapter = ContactsViewPagerAdapter(this, fragments)
+        mainViewPager.adapter = contactsViewPagerAdapter
     }
 
     private fun initListeners() {
-        signOutButton.setOnClickListener {
-            AuthUtils.signOutUser()
-            finish()
-            LoginActivity.start(this)
-        }
     }
 
     companion object {
