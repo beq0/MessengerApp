@@ -40,7 +40,7 @@ class RegisterActivity : AppCompatActivity(), IRegisterView {
     override fun registrationSuccessful(user: FirebaseUser) {
         Toast.makeText(this, "Registered: ${user.email}", Toast.LENGTH_SHORT).show()
         finish()
-        ContactsActivity.start(this, AuthUtils.getUsernameFromEmail(user.email!!))
+        ContactsActivity.start(this)
     }
 
     override fun registrationFailed() {

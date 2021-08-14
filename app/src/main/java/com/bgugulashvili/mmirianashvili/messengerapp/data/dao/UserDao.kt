@@ -10,14 +10,16 @@ class UserDao(firebaseDatabase: FirebaseDatabase) {
 
     private var ref: DatabaseReference = firebaseDatabase.getReference("Users")
 
-    fun getUser(username: String): Task<DataSnapshot> {
-        return ref.child(username).get()
+    fun getUser(uid: String): Task<DataSnapshot> {
+        return ref.child(uid).get()
     }
 
-    fun addUser(user: User) {
-        if (!user.username.isNullOrEmpty()) {
-            ref.child(user.username).setValue(user)
-        }
+    fun addUser(user: User): Task<Void> {
+        return ref.child(user.uid!!).setValue(user.toMap())
+    }
+
+    fun updateUser(uid: String, user: User): Task<Void> {
+        return ref.child(uid).updateChildren(user.toMap())
     }
 
 }

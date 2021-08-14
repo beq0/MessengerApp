@@ -13,11 +13,9 @@ import com.bgugulashvili.mmirianashvili.messengerapp.R
 import com.bgugulashvili.mmirianashvili.messengerapp.auth.AuthUtils
 import com.bgugulashvili.mmirianashvili.messengerapp.auth.login.LoginActivity
 
-class ContactsFragment(parentActivity: Activity) : Fragment() {
+class ContactsFragment(private var parentActivity: Activity) : Fragment() {
 
-    private lateinit var parentActivity: Activity
     private lateinit var currView: View
-    private lateinit var signOutButton: Button
     private lateinit var etSearch: EditText
 
     override fun onCreateView(
@@ -32,16 +30,10 @@ class ContactsFragment(parentActivity: Activity) : Fragment() {
     }
 
     private fun initView() {
-        signOutButton = currView.findViewById(R.id.profile_sign_out)
         etSearch = currView.findViewById(R.id.contacts_search)
     }
 
     private fun initListeners() {
-        signOutButton.setOnClickListener {
-            AuthUtils.signOutUser()
-            parentActivity.finish()
-            LoginActivity.start(parentActivity)
-        }
     }
 
 }

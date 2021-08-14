@@ -5,21 +5,21 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.bgugulashvili.mmirianashvili.messengerapp.R
 import com.bgugulashvili.mmirianashvili.messengerapp.auth.AuthUtils
-import com.bgugulashvili.mmirianashvili.messengerapp.auth.login.LoginActivity
+import com.bgugulashvili.mmirianashvili.messengerapp.contacts.profile.ProfileFragment
 import com.bgugulashvili.mmirianashvili.messengerapp.data.RealtimeDB
 import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.User
 import com.bgugulashvili.mmirianashvili.messengerapp.shared.BottomNavigationController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseUser
 import java.util.ArrayList
 
 class ContactsActivity : AppCompatActivity(), IContactsView {
+
+    private lateinit var currentUser: FirebaseUser
 
     private lateinit var mainViewPager: ViewPager2
     private lateinit var contactsFragment: Fragment
@@ -32,12 +32,12 @@ class ContactsActivity : AppCompatActivity(), IContactsView {
         setContentView(R.layout.activity_contacts)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        val username = intent.getStringExtra(USERNAME)!!
+        currentUser = AuthUtils.getCurrentUser()!!
 
         RealtimeDB.getInstance().userDao
-            .getUser(username)
-            .addOnCompleteListener {
-                Log.i(AuthUtils.LOG_TAG, "User credentials: ${it.result!!.value}")
+            .getUser(currentUser.uid)
+            .addOnSuccessListener {
+                Log.i(AuthUtils.LOG_TAG, "User credentials: ${it.value}")
             }.addOnFailureListener {
                 Log.e(AuthUtils.LOG_TAG, "Could not fetch user", it)
             }
@@ -58,7 +58,7 @@ class ContactsActivity : AppCompatActivity(), IContactsView {
 
     private fun initViewPager() {
         contactsFragment = ContactsFragment(this)
-        profileFragment = ProfileFragment()
+        profileFragment = ProfileFragment(this)
         fragments = arrayListOf(contactsFragment, profileFragment)
 
         contactsViewPagerAdapter = ContactsViewPagerAdapter(this, fragments)
@@ -69,12 +69,8 @@ class ContactsActivity : AppCompatActivity(), IContactsView {
     }
 
     companion object {
-        private const val USERNAME = "username"
-
-        fun start(context: Context, username: String) {
-            context.startActivity(Intent(context, ContactsActivity::class.java).apply {
-                putExtra(USERNAME, username)
-            })
+        fun start(context: Context) {
+            context.startActivity(Intent(context, ContactsActivity::class.java))
         }
     }
 

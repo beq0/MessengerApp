@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     override fun authenticationSuccessful(user: FirebaseUser) {
         Toast.makeText(this, "Logged in: ${user.email}", Toast.LENGTH_SHORT).show()
         finish()
-        ContactsActivity.start(this, AuthUtils.getUsernameFromEmail(user.email!!))
+        ContactsActivity.start(this)
     }
 
     override fun authenticationFailed() {
@@ -76,7 +76,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         Toast.makeText(this, "User already Logged in: ${user.email}", Toast.LENGTH_SHORT).show()
 
         finish()
-        ContactsActivity.start(this, AuthUtils.getUsernameFromEmail(user.email!!))
+        ContactsActivity.start(this)
     }
 
     companion object {

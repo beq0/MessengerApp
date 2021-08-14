@@ -12,12 +12,13 @@ class RegisterPresenter(var view: IRegisterView) : IRegisterPresenter {
     private val interactor = RegisterInteractor(this)
 
     override fun onUserRegister(username: String, password: String, profession: String) {
-        RealtimeDB.getInstance().userDao.addUser(User(username, password, profession))
         val auth = Firebase.auth
         auth.createUserWithEmailAndPassword(AuthUtils.getEmailFromUsername(username), password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    view.registrationSuccessful(auth.currentUser!!)
+                    val createdUser = auth.currentUser!!
+                    RealtimeDB.getInstance().userDao.addUser(User(createdUser.uid, username, profession))
+                    view.registrationSuccessful(createdUser)
                 } else {
                     Log.e(AuthUtils.LOG_TAG, task.exception.toString())
                     view.registrationFailed()
