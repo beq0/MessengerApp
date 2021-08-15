@@ -11,4 +11,5 @@
     <color name="mainTxtColor">#464646</color>
     <color name="secondaryTxtColor">#787878</color>
     <color name="mainTxtBackgroundColor">#f3f6ff</color>
+    <color name="chatTxtColor">#f4f4f4</color>
 </resources>
