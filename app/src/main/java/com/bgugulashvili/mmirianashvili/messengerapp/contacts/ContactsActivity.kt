@@ -44,7 +44,8 @@ class ContactsActivity : AppCompatActivity() {
         BottomNavigationController.init(
             this,
             findViewById(R.id.bottom_navigation_view),
-            findViewById(R.id.bottom_fab)
+            findViewById(R.id.bottom_fab),
+            findViewById(R.id.main_view_pager)
         )
         initView()
         initViewPager()
