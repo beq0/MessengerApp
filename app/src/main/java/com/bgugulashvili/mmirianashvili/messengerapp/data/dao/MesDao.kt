@@ -44,8 +44,12 @@ class MesDao(firebaseDatabase: FirebaseDatabase) {
             }
     }
 
-    fun getMessages(mesListId: String): Task<DataSnapshot> {
+    fun getLatestMessage(mesListId: String): Task<DataSnapshot> {
         return ref.child(mesListId).child("messages").limitToLast(1).get()
+    }
+
+    fun getMessages(mesListId: String): Task<DataSnapshot> {
+        return ref.child(mesListId).child("messages").get()
     }
 
 }

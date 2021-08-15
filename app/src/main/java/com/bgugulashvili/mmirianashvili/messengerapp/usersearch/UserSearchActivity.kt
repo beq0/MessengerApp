@@ -12,6 +12,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.bgugulashvili.mmirianashvili.messengerapp.R
 import com.bgugulashvili.mmirianashvili.messengerapp.auth.AuthUtils
+import com.bgugulashvili.mmirianashvili.messengerapp.chat.ChatActivity
 import com.bgugulashvili.mmirianashvili.messengerapp.data.RealtimeDB
 import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.user.User
 import java.util.concurrent.Executors
@@ -86,7 +87,8 @@ class UserSearchActivity : AppCompatActivity(), IUserSearchView, UserSearchUserC
             AuthUtils.getCurrentUserUid(), AuthUtils.getCurrentUserUsername(),
             item.uid, item.name, "mesiji ageraa"
         )
-        Toast.makeText(this, "User: ${item.name} clicked", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "User: ${item.name} clicked", Toast.LENGTH_SHORT).show()
+        ChatActivity.start(this, item.uid)
     }
 
     companion object {

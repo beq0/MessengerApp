@@ -15,27 +15,30 @@ class ContactsPresenter(var view: IContactsView) : IContactsPresenter {
         userDao.getUser(AuthUtils.getCurrentUserUid())
             .addOnSuccessListener {
                 val data = it.value as HashMap<String, Object>
-                val mesListIds = data["messages"] as HashMap<String, String>
-                for ((key, value) in mesListIds) {
-                    userDao.getUser(key).addOnSuccessListener { userIt ->
-                        val userDetails = userIt.value as HashMap<String, Object>
-                        val userToUsername = userDetails["username"] as String
-                        if (username != null) {
-                            if (userToUsername.indexOf(username) != -1) {
-                                fetchMessage(mesDao, value, userToUsername)
+                if (data["messages"] != null) {
+                    val mesListIds = data["messages"] as HashMap<String, String>
+                    for ((key, value) in mesListIds) {
+                        userDao.getUser(key).addOnSuccessListener { userIt ->
+                            val userDetails = userIt.value as HashMap<String, Object>
+                            val userToUsername = userDetails["username"] as String
+                            if (username != null) {
+                                if (userToUsername.indexOf(username) != -1) {
+                                    fetchMessage(mesDao, value, userToUsername, key)
+                                }
+                            } else {
+                                fetchMessage(mesDao, value, userToUsername, key)
                             }
-                        } else {
-                            fetchMessage(mesDao, value, userToUsername)
+
                         }
 
                     }
-
                 }
             }
     }
 
-    private fun fetchMessage(mesDao: MesDao, mesListId: String, userToUsername: String) {
-        mesDao.getMessages(mesListId).addOnSuccessListener { mesIt ->
+    private fun fetchMessage(mesDao: MesDao, mesListId: String, userToUsername: String,
+                            userToUid: String) {
+        mesDao.getLatestMessage(mesListId).addOnSuccessListener { mesIt ->
             val message = mesIt.value as HashMap<String, Object>
             for ((key1, val1) in message) {
                 val messageDetails = val1 as HashMap<String, Object>
@@ -43,7 +46,8 @@ class ContactsPresenter(var view: IContactsView) : IContactsPresenter {
                     messageDetails["uid"] as String,
                     userToUsername,
                     messageDetails["message"] as String,
-                    Date(messageDetails["messageTime"] as Long)
+                    Date(messageDetails["messageTime"] as Long),
+                    userToUid
                 )
                 view.onContactFound(item)
             }

@@ -85,7 +85,7 @@
             app:reverseLayout="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <TextView
+    <EditText
             android:hint="@string/chat_txt_placeholder"
             android:layout_width="match_parent"
             android:layout_height="60dp"

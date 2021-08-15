@@ -11,6 +11,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bgugulashvili.mmirianashvili.messengerapp.R
+import com.bgugulashvili.mmirianashvili.messengerapp.chat.ChatActivity
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
@@ -83,7 +84,8 @@ class ContactsFragment(private var parentActivity: Activity) : Fragment(), ICont
     }
 
     override fun onContactClicked(item: ContactsListItem) {
-        Toast.makeText(parentActivity, "Contact ${item.name}", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(parentActivity, "Contact ${item.name}", Toast.LENGTH_SHORT).show()
+        ChatActivity.start(parentActivity, item.toUid)
     }
 
     companion object {

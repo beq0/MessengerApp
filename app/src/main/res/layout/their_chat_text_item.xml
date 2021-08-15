@@ -8,23 +8,23 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/their_text_time"
-            app:layout_constraintBottom_toBottomOf="@+id/their_text"
-            app:layout_constraintTop_toTopOf="@+id/their_text"
-            app:layout_constraintStart_toEndOf="@+id/their_text"
+            android:id="@+id/chat_text_time"
+            app:layout_constraintBottom_toBottomOf="@+id/chat_text"
+            app:layout_constraintTop_toTopOf="@+id/chat_text"
+            app:layout_constraintStart_toEndOf="@+id/chat_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.07" />
+            app:layout_constraintHorizontal_bias="0.93" />
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/their_text"
+            android:id="@+id/chat_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="@drawable/their_chat_background"
             android:textSize="@dimen/chat_text_size"
-            android:textColor="@color/white"
+            android:textColor="@color/mainTxtColor"
             android:padding="@dimen/chat_text_padding"
             android:layout_marginTop="@dimen/chat_text_top_margin"
             android:layout_marginStart="20dp"/>
