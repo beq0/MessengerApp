@@ -22,4 +22,21 @@ class UserDao(firebaseDatabase: FirebaseDatabase) {
         return ref.child(uid).updateChildren(user.toMap())
     }
 
+    fun findUsers(username: String? = null, callback: ((ArrayList<User>) -> Unit)? = null) {
+        var result: ArrayList<User> = arrayListOf()
+        ref.get()
+            .addOnSuccessListener {
+                val data = it.value as HashMap<String, Object>
+                for ((key, value) in data) {
+                    val currUserVals = value as HashMap<String, Object>
+                    result.add(User(key, currUserVals["username"] as String, currUserVals["profession"] as String))
+                }
+                if (username != null) {
+                    result = ArrayList(result.filter { u -> u.username!!.indexOf(username) != -1 })
+                }
+                if (callback != null) {
+                    callback(result)
+                }
+            }
+    }
 }

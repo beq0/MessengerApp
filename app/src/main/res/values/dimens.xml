@@ -5,4 +5,8 @@
     <dimen name="primary_button_height">48dp</dimen>
     <dimen name="primary_text_view_width">340dp</dimen>
     <dimen name="primary_text_view_height">48dp</dimen>
+    <dimen name="toolbar_button_dimension">35dp</dimen>
+    <dimen name="user_search_user_item_height">100dp</dimen>
+    <dimen name="user_profile_icon_size">60dp</dimen>
+    <dimen name="user_search_profile_name_margin_top">10dp</dimen>
 </resources>

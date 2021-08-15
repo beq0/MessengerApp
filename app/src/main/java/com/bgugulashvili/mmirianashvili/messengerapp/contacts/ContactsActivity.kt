@@ -42,7 +42,11 @@ class ContactsActivity : AppCompatActivity(), IContactsView {
                 Log.e(AuthUtils.LOG_TAG, "Could not fetch user", it)
             }
 
-        BottomNavigationController.init(findViewById(R.id.bottom_navigation_view))
+        BottomNavigationController.init(
+            this,
+            findViewById(R.id.bottom_navigation_view),
+            findViewById(R.id.bottom_fab)
+        )
         initView()
         initViewPager()
         initListeners()

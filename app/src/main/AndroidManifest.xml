@@ -12,9 +12,12 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.MessengerApp">
         <activity
-                android:name=".contacts.ContactsActivity"
-                android:windowSoftInputMode="adjustPan"
+                android:name=".usersearch.UserSearchActivity"
                 android:exported="true" />
+        <activity
+                android:name=".contacts.ContactsActivity"
+                android:exported="true"
+                android:windowSoftInputMode="adjustPan" />
         <activity
                 android:name=".auth.register.RegisterActivity"
                 android:exported="true" />
