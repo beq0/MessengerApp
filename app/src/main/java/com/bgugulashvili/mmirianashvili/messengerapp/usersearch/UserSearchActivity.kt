@@ -11,7 +11,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.bgugulashvili.mmirianashvili.messengerapp.R
-import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.User
+import com.bgugulashvili.mmirianashvili.messengerapp.auth.AuthUtils
+import com.bgugulashvili.mmirianashvili.messengerapp.data.RealtimeDB
+import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.user.User
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
@@ -80,12 +82,16 @@ class UserSearchActivity : AppCompatActivity(), IUserSearchView, UserSearchUserC
     }
 
     override fun onUserClicked(item: UserSearchUserItem) {
+        RealtimeDB.getInstance().mesDao.addMessage(
+            AuthUtils.getCurrentUserUid(), AuthUtils.getCurrentUserUsername(),
+            item.uid, item.name, "mesiji ageraa"
+        )
         Toast.makeText(this, "User: ${item.name} clicked", Toast.LENGTH_SHORT).show()
     }
 
     companion object {
         private const val MIN_SEARCH_CHARS = 3
-        private const val TEXT_CHANGE_TIMEOUT_MILLIS = 2000L
+        private const val TEXT_CHANGE_TIMEOUT_MILLIS = 1500L
         fun start(context: Context) {
             context.startActivity(Intent(context, UserSearchActivity::class.java))
         }

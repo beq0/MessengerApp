@@ -3,7 +3,7 @@ package com.bgugulashvili.mmirianashvili.messengerapp.auth.register
 import android.util.Log
 import com.bgugulashvili.mmirianashvili.messengerapp.auth.AuthUtils
 import com.bgugulashvili.mmirianashvili.messengerapp.data.RealtimeDB
-import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.User
+import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.user.User
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

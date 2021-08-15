@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import com.bgugulashvili.mmirianashvili.messengerapp.R
 import com.bgugulashvili.mmirianashvili.messengerapp.auth.AuthUtils
 import com.bgugulashvili.mmirianashvili.messengerapp.auth.login.LoginActivity
-import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.User
+import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.user.User
 import com.google.android.material.button.MaterialButton
 
 class ProfileFragment(private var parentActivity: Activity) : Fragment(), IProfileView {

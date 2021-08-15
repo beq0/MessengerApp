@@ -12,12 +12,11 @@ import com.bgugulashvili.mmirianashvili.messengerapp.R
 import com.bgugulashvili.mmirianashvili.messengerapp.auth.AuthUtils
 import com.bgugulashvili.mmirianashvili.messengerapp.contacts.profile.ProfileFragment
 import com.bgugulashvili.mmirianashvili.messengerapp.data.RealtimeDB
-import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.User
 import com.bgugulashvili.mmirianashvili.messengerapp.shared.BottomNavigationController
 import com.google.firebase.auth.FirebaseUser
 import java.util.ArrayList
 
-class ContactsActivity : AppCompatActivity(), IContactsView {
+class ContactsActivity : AppCompatActivity() {
 
     private lateinit var currentUser: FirebaseUser
 
@@ -50,10 +49,6 @@ class ContactsActivity : AppCompatActivity(), IContactsView {
         initView()
         initViewPager()
         initListeners()
-    }
-
-    override fun onSearch(users: List<User>) {
-        TODO("Not yet implemented")
     }
 
     private fun initView() {

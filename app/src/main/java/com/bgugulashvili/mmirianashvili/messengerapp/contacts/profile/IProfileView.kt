@@ -1,6 +1,6 @@
 package com.bgugulashvili.mmirianashvili.messengerapp.contacts.profile
 
-import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.User
+import com.bgugulashvili.mmirianashvili.messengerapp.data.entity.user.User
 
 interface IProfileView {
 

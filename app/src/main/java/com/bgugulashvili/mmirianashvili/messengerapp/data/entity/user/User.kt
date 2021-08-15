@@ -1,4 +1,4 @@
-package com.bgugulashvili.mmirianashvili.messengerapp.data.entity
+package com.bgugulashvili.mmirianashvili.messengerapp.data.entity.user
 
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
@@ -7,7 +7,8 @@ import com.google.firebase.database.IgnoreExtraProperties
 data class User(
     val uid: String? = null,
     val username: String? = null,
-    val profession: String? = null
+    val profession: String? = null,
+    val messages: List<String>? = null
 ) {
     @Exclude
     fun toMap(): Map<String, Any?> {

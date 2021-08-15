@@ -32,4 +32,8 @@ object AuthUtils {
     fun updateCurrentUserEmail(username: String) {
         getCurrentUser()!!.updateEmail(getEmailFromUsername(username))
     }
+
+    fun getCurrentUserUid(): String {
+        return getCurrentUser()!!.uid
+    }
 }
