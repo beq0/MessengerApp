@@ -117,6 +117,12 @@ class ChatAdapter(var list: ArrayList<ChatItem>) :
         notifyItemChanged(list.size - 1)
     }
 
+    fun insertNewMessage(item: ChatItem) {
+        list.add(0, item)
+        notifyItemChanged(list.size - 1)
+        notifyItemChanged(0)
+    }
+
     companion object {
         private const val THEIR_CHAT_ITEM = 1
         private const val MY_CHAT_ITEM = 2

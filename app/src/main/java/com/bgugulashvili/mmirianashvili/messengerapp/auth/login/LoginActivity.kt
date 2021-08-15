@@ -73,7 +73,6 @@ class LoginActivity : AppCompatActivity(), ILoginView {
 
     private fun userAlreadyAuthenticated(user: FirebaseUser) {
         Log.i(AuthUtils.LOG_TAG, "User already logged in: ${user.email}")
-        Toast.makeText(this, "User already Logged in: ${user.email}", Toast.LENGTH_SHORT).show()
 
         finish()
         ContactsActivity.start(this)

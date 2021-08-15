@@ -24,6 +24,7 @@ class ContactsFragment(private var parentActivity: Activity) : Fragment(), ICont
     private lateinit var rvAdapter: ContactsListAdapter
 
     private lateinit var presenter: IContactsPresenter
+    private var isInitialized: Boolean = false
 
     private var searchTimer: ScheduledFuture<*>? = null
 
@@ -41,9 +42,18 @@ class ContactsFragment(private var parentActivity: Activity) : Fragment(), ICont
         return currView
     }
 
-    override fun onSearch(username: String) {
+    override fun onResume() {
+        super.onResume()
+        if (isInitialized) {
+            onSearch()
+        } else {
+            isInitialized = true
+        }
+    }
+
+    override fun onSearch(username: String?) {
         rvAdapter.removeData()
-        presenter.searchUsers()
+        presenter.searchUsers(username)
     }
 
     @Synchronized override fun onContactFound(contact: ContactsListItem) {
@@ -71,7 +81,7 @@ class ContactsFragment(private var parentActivity: Activity) : Fragment(), ICont
             } else {
                 searchTimer?.cancel(true)
                 searchTimer = Executors.newSingleThreadScheduledExecutor().schedule({
-                    onSearch(username)
+                    onSearch()
                 }, TEXT_CHANGE_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)
             }
         }

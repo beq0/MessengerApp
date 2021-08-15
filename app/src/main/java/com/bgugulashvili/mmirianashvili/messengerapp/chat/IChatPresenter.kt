@@ -4,4 +4,6 @@ interface IChatPresenter {
 
     fun loadChat(uid: String)
 
+    fun sendMessage(uid: String, username: String, message: String)
+
 }

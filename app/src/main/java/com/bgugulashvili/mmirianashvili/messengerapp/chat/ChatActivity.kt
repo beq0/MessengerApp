@@ -4,17 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bgugulashvili.mmirianashvili.messengerapp.R
 import android.view.MotionEvent
 
 import android.view.View.OnTouchListener
-
-
+import android.widget.*
+import java.util.*
 
 
 class ChatActivity : AppCompatActivity(), IChatView {
@@ -51,6 +47,15 @@ class ChatActivity : AppCompatActivity(), IChatView {
         }
     }
 
+    @Synchronized override fun onMessageSent(item: ChatItem) {
+        if (rvAdapter.list.isNullOrEmpty()) {
+            rvAdapter.list = arrayListOf(item)
+            rvAdapter.notifyDataSetChanged()
+        } else {
+            rvAdapter.insertNewMessage(item)
+        }
+    }
+
     override fun onUserLoaded(username: String, profession: String) {
         tvUsername.text = username
         tvProfession.text = profession
@@ -68,20 +73,16 @@ class ChatActivity : AppCompatActivity(), IChatView {
         btnBack.setOnClickListener {
             finish()
         }
-//        etChatText.setOnTouchListener(OnTouchListener { v, event ->
-//            val DRAWABLE_LEFT = 0
-//            val DRAWABLE_TOP = 1
-//            val DRAWABLE_RIGHT = 2
-//            val DRAWABLE_BOTTOM = 3
-//            if (event.action == MotionEvent.ACTION_UP) {
-//                if (event.rawX >= etChatText.getRight() - etChatText.getCompoundDrawables()
-//                        .get(DRAWABLE_RIGHT).getBounds().width()
-//                ) {
-//
-//                }
-//            }
-//            false
-//        })
+        etChatText.setOnTouchListener { _, event ->
+            val DRAWABLE_RIGHT = 2
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.x >= etChatText.width - 60 -
+                    etChatText.compoundDrawables[DRAWABLE_RIGHT].bounds.width()) {
+                    presenter.sendMessage(uid, tvUsername.text.toString(), etChatText.text.toString())
+                }
+            }
+            false
+        }
     }
 
     private fun initAdapter() {

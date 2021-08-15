@@ -98,7 +98,7 @@
             android:gravity="center_vertical"
             android:paddingStart="20dp"
             android:textColor="@color/mainTxtColor"
-            android:paddingEnd="20dp"
+            android:paddingEnd="@dimen/chat_send_icon_padding"
             android:drawablePadding="10dp"
             app:drawableEndCompat="@drawable/chat_send_icon"
             android:layout_marginBottom="50dp"/>

@@ -12,4 +12,5 @@
     <dimen name="chat_text_size">14sp</dimen>
     <dimen name="chat_text_padding">20dp</dimen>
     <dimen name="chat_text_top_margin">30dp</dimen>
+    <dimen name="chat_send_icon_padding">20dp</dimen>
 </resources>

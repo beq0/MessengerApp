@@ -32,15 +32,25 @@ class ChatPresenter(private var view: IChatView) : IChatPresenter {
             }
     }
 
+    override fun sendMessage(uid: String, username: String, message: String) {
+        RealtimeDB.getInstance().mesDao.addMessage(AuthUtils.getCurrentUserUid(),
+        AuthUtils.getCurrentUserUsername(), uid, username, message)
+        view.onChatItemLoaded(ChatItem(AuthUtils.getCurrentUserUid(), message, Date()))
+    }
+
     private fun fetchMessages(mesDao: MesDao, mesListId: String) {
         mesDao.getMessages(mesListId).addOnSuccessListener { mesIt ->
-            val message = mesIt.value as HashMap<String, Object>
-            for ((key1, val1) in message) {
+            val messages = mesIt.value as HashMap<String, Object>
+            var sortedMessages = TreeMap<Long, Object>()
+            for ((key1, val1) in messages) {
+                sortedMessages[-key1.toLong()] = val1
+            }
+            for ((key1, val1) in sortedMessages) {
                 val messageDetails = val1 as HashMap<String, Object>
                 val item = ChatItem(
                     messageDetails["uid"] as String,
                     messageDetails["message"] as String,
-                    Date(messageDetails["messageTime"] as Long)
+                    Date(-key1)
                 )
                 view.onChatItemLoaded(item)
             }
